@@ -10,4 +10,3 @@
 
 ![photo_2023-10-09_21-48-03](https://github.com/KeimaSenpai/X-Launcher/assets/98184310/97b14128-baec-4657-82ca-a746d50631c8)
 
-![photo_2023-10-09_21-48-06](https://github.com/KeimaSenpai/X-Launcher/assets/98184310/9f1442d0-feee-4380-8779-1ba92f2d07e1)
