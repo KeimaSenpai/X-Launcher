@@ -1,47 +1,35 @@
 import minecraft_launcher_lib
 import subprocess
+import sys
 import os
 
-version = input('Dime la versión: ')
-username = input('Nombre: ')
-user_windows = os.environ['USERNAME']
-LOCAL_PATH = f"C://Users//{user_windows}//AppData//Roaming//.xlauncher"
-
-# Barra de progreso
-current_max = 0
-
-
-def set_status(status: str):
-    print(status)
-
-
-def set_progress(progress: int):
-    if current_max != 0:
-        print(f"{progress}/{current_max}")
-
-
-def set_max(new_max: int):
-    global current_max
-    current_max = new_max
-
-
-callback = {
-    "setStatus": set_status,
-    "setProgress": set_progress,
-    "setMax": set_max
-}
-
-# Instalar Minecraft y sus dependencias
-minecraft_launcher_lib.install.install_minecraft_version(
-    versionid=version, minecraft_directory=LOCAL_PATH, callback=callback)
-
-# Opciones del launcher
+# versions = minecraft_launcher_lib.utils.get_version_list()
+# for version in versions:
+#     print(version['id'])
 options = {
-    'usename': username,
+    'usename': "KeimaSenpai",
     'uuid': '',
-    'token': ''
-}
+    'token': '',
 
-# Abrir Minecraft
-subprocess.call(minecraft_launcher_lib.command.get_minecraft_command(
-    version=version, minecraft_directory=LOCAL_PATH, options=options))
+    "jvmArguments": [],  # The jvmArguments
+    "launcherName": "x-launcher",
+    "launcherVersion": "0.0.1",
+}
+user_windows = os.environ['USERNAME']
+minecraft_directory = f"C://Users//{user_windows}//AppData//Roaming//.xlauncher"
+forfe = minecraft_launcher_lib.forge.find_forge_version('1.16.5')
+print(forfe)
+
+minecraft_launcher_lib.install.install_minecraft_version(
+    "1.16.5", minecraft_directory)
+print('Instala la 1.16.5')
+
+minecraft_launcher_lib.forge.install_forge_version(
+    forfe, minecraft_directory)
+print('Instalado Forge')
+
+
+minecraft_command = minecraft_launcher_lib.command.get_minecraft_command(
+    '1.16.5-forge-36.2.39', minecraft_directory, options)
+
+subprocess.run(minecraft_command)
